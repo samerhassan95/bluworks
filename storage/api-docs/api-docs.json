@@ -1,0 +1,85 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Worker API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/api/clock-in": {
+            "post": {
+                "summary": "Clock in a worker",
+                "operationId": "f28d387b7c3960b4c3d38ff4cbd99539",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "worker_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "timestamp": {
+                                        "type": "integer",
+                                        "example": 1621234567
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -34.615662
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": -58.362512
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clock-in recorded successfully"
+                    },
+                    "400": {
+                        "description": "Location not within 2km radius"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/clock-ins": {
+            "get": {
+                "summary": "Get list of clock-ins for a specific worker",
+                "operationId": "c3be7497d068104e4f1b63fb37db787b",
+                "parameters": [
+                    {
+                        "name": "worker_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    }
+}

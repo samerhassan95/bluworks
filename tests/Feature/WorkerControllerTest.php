@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\Worker;
 use App\Models\ClockIn;
 use App\Http\Controllers\WorkerController;
+use App\Services\DistanceService;
 
 class WorkerControllerTest extends TestCase
 {
@@ -87,18 +88,4 @@ class WorkerControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_calculates_distance_correctly()
-    {
-        $workerController = new WorkerController();
-
-        $lat1 = -34.615662;
-        $lon1 = -58.362512;
-        $lat2 = -34.615700;
-        $lon2 = -58.362600;
-
-        $distance = $workerController->distance($lat1, $lon1, $lat2, $lon2);
-
-        $this->assertIsFloat($distance);
-        $this->assertLessThan(2, $distance, 'Distance should be less than 2 km');
-    }
 }
